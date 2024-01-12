@@ -1049,6 +1049,7 @@ class sorts {
       return 0;
     
   }
+ 
 
 
 
@@ -1104,13 +1105,15 @@ class sorts {
         // int[] b = {2, 3, 6, 15};
         //   System.out.println(median(a,b));
       // System.out.println(8);
-      ArrayList<Integer> l=new ArrayList<>();
-      ArrayList<Integer> l2=new ArrayList<>();
-      l.add(1);
-      l.add(3);
-      l.add(30);
-      l2.add(12);
-      System.out.print(kthElement(l,l2,4));
-    }
+      // ArrayList<Integer> l=new ArrayList<>();
+      // ArrayList<Integer> l2=new ArrayList<>();
+      // l.add(1);
+      // l.add(3);
+      // l.add(30);
+      // l2.add(12);
+      // System.out.print(kthElement(l,l2,4));
+      
+
+      }
 
 }
