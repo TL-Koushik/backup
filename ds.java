@@ -1049,6 +1049,60 @@ class sorts {
       return 0;
     
   }
+
+   public static int minSteps(String s, String t) {
+        int count=0;
+        int i=0;
+        int j=0;
+        int n=s.length();
+        char[] charArray = s.toCharArray();
+         char[] charArray1 = t.toCharArray();
+        // Sorting the character array
+        java.util.Arrays.sort(charArray);
+         java.util.Arrays.sort(charArray1);
+        // Creating a new string from the sorted character array
+        String ss = new String(charArray);
+        String tt = new String(charArray1);
+        while(i<n && j<n){
+          int snum=(int)ss.charAt(i);
+          int tnum=(int)tt.charAt(j);
+          if(snum==tnum){
+            i++;
+            j++;
+          }
+          else if(snum<tnum){
+            i++;
+            count++;
+          }
+          else{
+            j++;
+            count++;
+          }
+        }
+        if(i<n){
+          count+=n-i;
+        }
+        if(j<n){
+          count+=n-j;
+        }
+        return (int)count/2;
+    }
+    public static int optimalminSteps(String s, String t) {
+       int count=0;
+    //    int n=s.length();
+       int[] scount=new int[26];
+       int[] tcount=new int[26];
+        for(char ch : s.toCharArray()){
+            scount[ch-'a']++;
+        }
+        for(char ch : t.toCharArray()){
+            tcount[ch-'a']++;
+        }
+        for(int i=0;i<26;i++){
+            count+=Math.abs(scount[i]-tcount[i]);
+        }
+        return count/2;
+    }
  
 
 
@@ -1112,6 +1166,7 @@ class sorts {
       // l.add(30);
       // l2.add(12);
       // System.out.print(kthElement(l,l2,4));
+      System.out.print(minSteps("leetcode","practice"));
       
 
       }
