@@ -1103,7 +1103,63 @@ class sorts {
         }
         return count/2;
     }
- 
+    
+    
+    // public boolean closeStrings(String word1, String word2) {
+    //     int n=word1.length();
+    //     if(n!=word2.length()) return false;
+    //     Map<Character,Integer> word1counter=new Treemap<>();
+    //     Map<Character,Integer> word2counter=new Treemap<>();
+    //     for(int i=0;i<=n-1;i++){
+    //       char c=word1.charAt(i);
+    //       char e=word2.charAt(i);
+    //       if(!word2.contains(i)) return false;
+    //       if(word1counter.containsKey(c)){         this apporach is crt but implementation isnt
+    //         word1counter.put(c,word1counter.get(c));
+    //       }
+    //       else{                dont use tree map or map for alphabets because they are only 26
+                                  // using arrays it will be useful and easy and effecient
+    //         word1counter.put(c,1);
+    //       }
+    //       if(word2counter.containsKey(e)){
+    //         word2counter.put(e,word1counter.get(e));
+    //       }
+    //       else{
+    //         word2counter.put(e,1);
+    //       }
+
+    //     }
+    //     return false;
+    // }
+
+
+    public static boolean closeStrings(String word1, String word2) {
+      if(word1.length()!=word2.length()) return false;
+      int n=word1.length();
+      int[] freq1=new int[26];
+      int[] freq2=new int[26];
+      for(int i=0;i<=n-1;i++){
+        char c1=word1.charAt(i);
+        char c2=word2.charAt(i);
+        freq1[c1-'a']++;
+        freq2[c2-'a']++;
+      }
+      for(int i=0;i<=n-1;i++){
+            if((freq1[i]==0 && freq2[i]!=0 ) || (freq2[i]==0 && freq1[i]!=0)){
+              return false;
+            }
+      }
+      Arrays.sort(freq1);
+      Arrays.sort(freq2);
+      for(int i=0;i<=n-1;i++){
+        if(freq1[i]!=freq2[i]){
+          return false;
+        }
+      }
+      return true;
+
+
+    }
 
 
 
@@ -1166,7 +1222,9 @@ class sorts {
       // l.add(30);
       // l2.add(12);
       // System.out.print(kthElement(l,l2,4));
-      System.out.print(minSteps("leetcode","practice"));
+      // System.out.print(minSteps("leetcode","practice"));
+      System.out.print(closeStrings("abbccc","cabbba"));
+      
       
 
       }
