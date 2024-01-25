@@ -1161,7 +1161,117 @@ class sorts {
 
     }
 
+    public static String reverseWordswithotsplit(String s) {
+        StringBuilder rev=new StringBuilder();
+        for(int i=s.length()-1;i>=0;i--){
+          if(s.charAt(i)==' '){
+              if(rev.charAt(rev.length()-1)==' '){
+                continue;
+              }
+              else{
+                rev.append(' ');
+              }
+          }
+          else{
+            rev.append(s.charAt(i));
+          }
+        }
+        String reve=rev.toString();
+        Stack<Character> orderch=new Stack<>();
+        StringBuilder ans=new StringBuilder();
+        for(int i=0;i<reve.length();i++){
+            if(reve.charAt(i)==' '){
+              ans.append(' ');
+              while(!orderch.isEmpty()){
+                ans.append(orderch.pop());
+              }
+            }
+            else{
+              orderch.push(reve.charAt(i));
+            }
+        }
+        if(!orderch.isEmpty()){
+        ans.append(' ');
+        while(!orderch.isEmpty()){
+          ans.append(orderch.pop());
+        }
+        }
+        return ans.toString().substring(1,ans.length());
+    }
+    public static String reverseWords(String s) {
+        String[] each=s.trim().split("\\s+");
+        StringBuilder rev=new StringBuilder();
+        for(int i=each.length-1;i>=0;i--){
+          rev.append(each[i]);
+          rev.append(" ");
+        }
+        return rev.toString();
+    }
 
+    public static String largestOddNumber(String num) {
+        for(int i=num.length()-1;i>=0;i--){
+          int curpos=Integer.parseInt(""+num.charAt(i));
+          if(curpos%2==1){
+            return num.substring(0,i+1);
+          }
+        }
+        return "";
+    }
+
+    public static String longestCommonPrefix(String[] strs) {
+      int minind=-1;
+      int min=Integer.MIN_VALUE;
+      for(int i=0;i<strs.length;i++){
+          if(min<strs[i].length()){
+            min=strs[i].length();
+            minind=i;
+          }
+      }
+      String minStr=strs[minind];
+      for(int i=minStr.length()-1;i>=0;i--){
+        String curpre=minStr.substring(0,i+1);
+        for(int k=0;k<strs.length;k++){
+          if(!strs[k].startsWith(curpre)){
+            break;
+          }
+          else if(strs[k].startsWith(curpre) && k==strs.length-1){
+            return curpre;
+          }
+        }
+      }
+      return "";
+    }
+
+
+     public static boolean isIsomorphic(String s, String t) {
+        int[] smap=new int[200];
+        int[] tmap=new int[200];
+        for(int i=0;i<s.length();i++){
+          if(smap[s.charAt(i)]!=tmap[t.charAt(i)]){
+            return false;
+          }
+        //   int id = (int) (Math.random() * 200) + 1;
+          smap[s.charAt(i)]=i+1;
+          tmap[t.charAt(i)]=i+1;
+        }
+        return true;
+    }
+
+    public static boolean rotateString(String s, String goal) {
+        if(s.length()!=goal.length()) return false;
+        char first=s.charAt(0);
+        int index=-1;
+        for(int i=0;i<s.length();i++){
+            if(first==goal.charAt(i)){
+              index=i;
+              break;
+            }
+        }
+        System.out.print(goal.substring(0,index));
+        if(s.contains(goal.substring(0,index)) && s.contains(goal.substring(index,goal.length()))) return true;
+        return false;//deonst pass all test case;
+        
+    }
 
   public static void main(String[] args) {
         int[] arr={1,2,3,4,5,6,7,8,9,10};
@@ -1223,10 +1333,18 @@ class sorts {
       // l2.add(12);
       // System.out.print(kthElement(l,l2,4));
       // System.out.print(minSteps("leetcode","practice"));
-      System.out.print(closeStrings("abbccc","cabbba"));
-      
-      
-
+      // System.out.print(closeScd trings("abbccc","cabbba"));
+        // System.out.println(reverseWords("hello world to be     happy"));
+        // String s="   dsd m    kdm    ";
+        // String[] sds=s.trim().split("\\s+");
+        // System.out.println(largestOddNumber("52"));
+        // String[] strs = {"flower","flow","flight"};
+        // System.out.println(longestCommonPrefix(strs));
+        // System.out.println(isIsomorphic("fok","hdd"));
+        // String s="nds";
+        // String goal="sd";
+        System.out.println(rotateString("bbbacddceeb","ceebbbbacdd"));
+        
       }
 
 }
