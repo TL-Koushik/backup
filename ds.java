@@ -1272,6 +1272,54 @@ class sorts {
         return false;//deonst pass all test case;
         
     }
+    static class pairfe{
+          int c;
+          int freq;
+         public pairfe(int c,int freq){
+              this.c=c;
+              this.freq=freq;
+          }
+    }
+    public static String frequencySort(String s) {
+          pairfe[] list=new pairfe[200];
+          // System.out.print(list[0]);
+          for(int i=0;i<s.length();i++){
+              int inde=s.charAt(i);
+              if(list[inde]==null){
+                list[inde]=new pairfe(inde,1);
+              }
+              else{
+                list[inde].freq++;
+              }
+          }
+          Arrays.sort(list, (a, b) -> {
+    if (a == null && b == null) {
+        return 0;
+    } else if (a == null) {
+        return Integer.compare(b.freq, 0);
+    } else if (b == null) {
+        return Integer.compare(0, a.freq);
+    } else {
+        return Integer.compare(b.freq, a.freq);
+    }
+});
+StringBuilder str=new StringBuilder();
+    for(int i=0;;i++){
+      if(list[i]==null){
+        break;
+      }
+      else{
+        int co=list[i].freq;
+        while(co>0){
+            str.append((char)list[i].c);
+            co--;
+        }
+      }
+    }
+          
+          
+          return str.toString();
+    }
 
   public static void main(String[] args) {
         int[] arr={1,2,3,4,5,6,7,8,9,10};
@@ -1343,8 +1391,8 @@ class sorts {
         // System.out.println(isIsomorphic("fok","hdd"));
         // String s="nds";
         // String goal="sd";
-        System.out.println(rotateString("bbbacddceeb","ceebbbbacdd"));
-        
+        // System.out.println(rotateString("bbbacddceeb","ceebbbbacdd"));
+        System.out.println(frequencySort("rttetrrreer"));
       }
 
 }
