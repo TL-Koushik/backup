@@ -1321,6 +1321,155 @@ StringBuilder str=new StringBuilder();
           return str.toString();
     }
 
+    public static int maxDepth(String s) {
+        int maxdep=0;
+        int count=0;
+        for(int i=0;i<s.length();i++){
+          char c=s.charAt(i);
+          if(c=='(') count++;
+          else if(c==')') count--;
+          maxdep=Math.max(count,maxdep);
+        }
+        return maxdep;
+    }    
+    
+    // public int myAtoi(String s) {
+        // StringBuilder number=new StringBuilder();
+        // boolean neg=false;
+        // if(s.contains("-")) neg=true; 
+        // for(int i=0;i<s.length();i++){
+          // char cur=s.charAt(i);
+          // if(Character.isDigit(cur){
+            // 
+          // }
+          // else{
+            // break;
+          // }
+        // }
+        // if(Integer.parseInt(number.toString())>Integer.MAX_VALUE && neg) return Integer.MIN_VALUE;
+        // if(In)
+    // }
+    public static int countSubStrings(String str, int k) {
+    HashMap<Character, Integer> hs = new HashMap<>();
+    int tsub = 0;
+    int i = 0;
+    int j = 0;
+    while (j <= str.length() - 1) {
+        char cur = str.charAt(j);
+        if (hs.size() == k) {
+            tsub++;
+
+            char ati = str.charAt(i);
+            if (hs.get(ati) > 1) {
+                hs.put(ati, hs.get(ati) - 1);
+            } else {
+                hs.remove(ati);
+            }
+            i++;
+        } else if (hs.size() < k) {
+            if (hs.containsKey(cur)) {
+                hs.put(cur, hs.get(cur) + 1);
+            } else {
+                hs.put(cur, 1);
+            }
+            j++;
+        }
+    }
+    // Check the remaining substrings from the last index i to the end
+    while (i < str.length() && hs.size() == k) {
+        tsub++;
+        char ati = str.charAt(i);
+        if (hs.get(ati) > 1) {
+            hs.put(ati, hs.get(ati) - 1);
+        } else {
+            hs.remove(ati);
+        }
+        i++;
+    }
+    return tsub+1;
+  }
+
+  public static String longestPalindromeeror(String s) {//time complexity O(n)
+      int i=0;//doesnt pass all the testcases only 72 testcases passed
+      int j=s.length()-1;
+      if(s.length()==1) return s;
+      if(s.length()==2  && s.charAt(i)!=s.charAt(j)) return s.charAt(i)+"";
+      // "babad"     "cbbd"
+      while(i<=j){
+        char val1=s.charAt(i);
+        char val2=s.charAt(j);
+        if(val2!=val1){
+          // System.out.println(val1 +"" + val2);
+          System.out.println(s.substring(i,j+1));
+          if(s.substring(i+1,j).contains(""+val1)){
+             j--;
+          }
+          else if(s.substring(i,j).contains(""+val2) ) {
+            i++;
+          }
+          else{
+            i++;
+            j--;
+          }
+        }
+        else{
+          int ind1=i;
+          int ind2=j;
+          while(ind1<=ind2){
+            char val3=s.charAt(ind1);
+            char val4=s.charAt(ind2);
+            if(val3!=val4) {
+              i=ind1;
+              j=ind2;
+              break;
+            }
+            else if(ind1==ind2 || ind1+1==ind2){
+               return s.substring(i,j+1);
+            }
+            System.out.println(s.substring(ind1,ind2+1));
+            ind1++;
+            ind2--;
+          }
+        }
+      }
+      return ""+s.charAt(0);                    
+  }
+  public static int evaluate(int num1,int num2,char cur){
+      switch(cur){
+        case '+' : return num1+num2;
+        case '-' : return num1-num2;
+        case '/' : return (int)(num1/num2);
+        case '*' : return num1*num2;
+      }
+      return 0;
+  }
+
+  public static int evalRPN(String[] tokens) {
+        Stack<Integer> st=new Stack<>();
+        for(int i=0;i<tokens.length;i++){
+          char cur=tokens[i].charAt(tokens[i].length()-1);
+          if(Character.isDigit(cur)){
+            st.push(Integer.parseInt(tokens[i]));
+            // System.out.println(tokens[i]);
+          }
+          else{
+            int num2=st.pop();
+            int num1=st.pop();
+            st.push(evaluate(num1,num2,cur));
+            // System.out.println(st.peek());
+          }
+        } 
+        return st.peek();     
+  }
+
+  public static String longestPalindrome(String s){
+      String res="";
+      for(int i=0;i<s.length;i++){
+       }
+  
+  }
+
+
   public static void main(String[] args) {
         int[] arr={1,2,3,4,5,6,7,8,9,10};
         // arr=selection(arr);
@@ -1392,7 +1541,12 @@ StringBuilder str=new StringBuilder();
         // String s="nds";
         // String goal="sd";
         // System.out.println(rotateString("bbbacddceeb","ceebbbbacdd"));
-        System.out.println(frequencySort("rttetrrreer"));
+        // System.out.println(frequencySort("rttetrrreer"));
+          // System.out.println(maxDepth("(1)+((2))+(((3)))"));
+          // System.out.print(countSubStrings("aacfssa",3));
+          // String[] tokens={"10","6","9","3","+","-11","*","/","*","17","+","5","+"};
+          // System.out.println(evalRPN(tokens));
+          System.out.println(longestPalindrome("aacabdkacaa"));
       }
 
 }
