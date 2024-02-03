@@ -1464,10 +1464,67 @@ StringBuilder str=new StringBuilder();
 
   public static String longestPalindrome(String s){
       String res="";
-      for(int i=0;i<s.length;i++){
-       }
-  
+      //this is for odd size and complexity is O(n2) and this uses manchers algo and we use orbit of each character
+      for(int i=0;i<s.length();i++){
+          int or=1;
+          int len=1;
+          while(i-or>=0 && or+i<s.length()){
+              if(s.charAt(i-or) == s.charAt(or+i)){
+                len+=2;
+                or++;
+              }
+              else{
+                break;
+              }
+          }
+          if(len>res.length()){
+            res=s.substring(i-(len/2),i-(len/2)+len);
+          }
+      }
+      return res;
   }
+
+  public static String reverseWordsopti(String s) {//optimized with the space and extra characters
+      int i=0;
+      int n=s.length();
+      String ans="";
+      String temp="";
+      while(i<n){
+        char cur=s.charAt(i);
+        if(cur!=' '){
+            temp+=cur;
+        }
+        else if(cur==' '){
+          if(ans.equals("")){
+              ans=temp;
+          }
+          else if(ans.charAt(ans.length()-1)!=' '){
+            ans=temp + " " +ans ;
+          }
+          temp="";
+        }
+        i++;
+      }
+      if(temp!=""){
+        if(ans.equals("")){
+          ans=temp;
+        }
+        else{
+          ans=temp + " " +ans ;
+        }
+      }
+      return ans;
+  }
+
+
+  public static int factorial(int n){
+    if(n==0 || n==1){
+      return n;
+    }
+    int remining=factorial(n-1);
+    return n*remining;
+  }
+
 
 
   public static void main(String[] args) {
@@ -1531,7 +1588,7 @@ StringBuilder str=new StringBuilder();
       // System.out.print(kthElement(l,l2,4));
       // System.out.print(minSteps("leetcode","practice"));
       // System.out.print(closeScd trings("abbccc","cabbba"));
-        // System.out.println(reverseWords("hello world to be     happy"));
+        // System.out.println(reverseWordsopti("hello     world to be happy"));
         // String s="   dsd m    kdm    ";
         // String[] sds=s.trim().split("\\s+");
         // System.out.println(largestOddNumber("52"));
@@ -1546,7 +1603,8 @@ StringBuilder str=new StringBuilder();
           // System.out.print(countSubStrings("aacfssa",3));
           // String[] tokens={"10","6","9","3","+","-11","*","/","*","17","+","5","+"};
           // System.out.println(evalRPN(tokens));
-          System.out.println(longestPalindrome("aacabdkacaa"));
+          // System.out.println(longestPalindrome("aacabdkacaa"));
+          System.out.println(factorial(5));
       }
 
 }
