@@ -1524,6 +1524,61 @@ StringBuilder str=new StringBuilder();
     int remining=factorial(n-1);
     return n*remining;
   }
+  // public static void insert(int[] a,num){
+  //   if(a.length==1 && a[a.length-1]<=num){
+        
+  //   }
+  // }
+  // public static void sortrecu(int[] a){
+  //   if(a.length==0 || a.length==1){
+  //     return;
+  //   }
+  //   int num=a[a.length-1];
+  //   sortrecu(Arrays.copyOfRange(0,a.length-1));
+  //   insert(arr,num);
+  //   return;
+  // }
+  public static int lowerbound(int[] a,int t){
+      int low=0;
+      int high=a.length-1;
+      while(low<=high){
+          int mid=(low+high)/2;
+          if(a[mid]<=t){
+            low=mid+1;
+          }
+          else{
+            high=mid-1;
+          }
+      }
+      return high;
+    }
+    public static int maxvotes(int[] a,int index){
+      int leader=-1;
+      int count=0;
+      int[] hs=new int[100];
+      for(int i=0;i<a.length;i++){
+        hs[a[i]]++;
+      }
+      int max=Integer.MIN_VALUE;
+      int max2=max;
+      for(int i=0;i<hs.length;i++){
+        if(max<hs[i]){
+            leader=i;
+            max2=max;
+            max=hs[i];
+        }
+      }
+      // if(max>max2) return leader; 
+      return leader;
+    }
+
+    // public List<List<String>> groupAnagrams(String[] strs) {
+        
+    // }
+  
+
+
+
 
 
 
@@ -1604,7 +1659,17 @@ StringBuilder str=new StringBuilder();
           // String[] tokens={"10","6","9","3","+","-11","*","/","*","17","+","5","+"};
           // System.out.println(evalRPN(tokens));
           // System.out.println(longestPalindrome("aacabdkacaa"));
-          System.out.println(factorial(5));
+          // System.out.println(factorial(5));
+          // String s="hfuiudfhsh";
+          // int[] s={0,5,10,15,20,25,30};
+          // int[] v={0,1,1,0,0,1,1,0};
+          // int inde=lowerbound(s,15);
+          
+          // System.out.println(inde);
+          // int[] vs=Arrays.copyOfRange(v,0,inde+1);
+          // for(int i : vs)System.out.println(i);
+            System.out.println(10/Math.sqrt(10));
+          // System.out.println(maxvotes(vs,inde));
       }
 
 }
