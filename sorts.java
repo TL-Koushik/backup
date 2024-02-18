@@ -1571,13 +1571,65 @@ StringBuilder str=new StringBuilder();
       // if(max>max2) return leader; 
       return leader;
     }
+static int co=1;
+    public static void printsal(String s,String out){
+            if(s.length() <1){
+              System.out.println(out + co);
+              co++;
+              return;
+            }
+            // System.out.println(ou`t);
+            printsal(s.substring(1),out+s.charAt(0));
+            printsal(s.substring(1),out);
+    }
+      
+    public static void subsewithspaces(String out,String in){
+          if(in.length()==0){
+            System.out.println(out);
+            return;
+          }
+          if(out.length()==0){
+              subsewithspaces(out+in.charAt(0),in.substring(1));
+          }
+          else{
+            subsewithspaces(out+" "+in.charAt(0),in.substring(1));
+            subsewithspaces(out+in.charAt(0),in.substring(1));
+          }
+    }
 
-    // public List<List<String>> groupAnagrams(String[] strs) {
-        
-    // }
-  
-
-
+    public static void caporloew(String out,String in){
+          if(in.length()==0) {
+            System.out.println(out);
+            return;
+          }
+          caporloew(out+in.charAt(0),in.substring(1));
+          String k=in.charAt(0)+"";
+          caporloew(out+k.toUpperCase(),in.substring(1));
+    }
+    public static void caporloewwithleanduppercase(String out,String in){
+           if(in.length()==0) {
+            System.out.println(out);
+            return;
+          }
+          String cur=in.charAt(0)+"";
+          if(Character.isDigit(cur.charAt(0))){
+            caporloewwithleanduppercase(out+cur,in.substring(1));  
+          }
+          else{
+            caporloewwithleanduppercase(out+cur.toUpperCase(),in.substring(1));
+            caporloewwithleanduppercase(out+cur.toLowerCase(),in.substring(1));
+          }
+    }
+    public static void onesmorezeros(String s,int ones,int zeros,int n){
+      if(n==0){
+        System.out.println(s);
+        return;
+      }
+      if(ones>zeros){
+          onesmorezeros(s+"0",ones,++zeros,n-1);
+      }
+      onesmorezeros(s+"1",++ones,zeros,n-1);
+    }
 
 
 
@@ -1608,7 +1660,8 @@ StringBuilder str=new StringBuilder();
             // else{
             //     System.out.println("hello");
             // }
-
+            // caporloew("","ab");
+            // caporloewwithleanduppercase("","a1Bc2");
             // int[][] e=;
             // int[] r=spiralmatrix(e);
             // triplet(4,arr);
@@ -1659,17 +1712,20 @@ StringBuilder str=new StringBuilder();
           // String[] tokens={"10","6","9","3","+","-11","*","/","*","17","+","5","+"};
           // System.out.println(evalRPN(tokens));
           // System.out.println(longestPalindrome("aacabdkacaa"));
-          // System.out.println(factorial(5));
           // String s="hfuiudfhsh";
           // int[] s={0,5,10,15,20,25,30};
           // int[] v={0,1,1,0,0,1,1,0};
           // int inde=lowerbound(s,15);
-          
+          // String s="2";
+          // System.out.println(s.toUpperCase());
+
           // System.out.println(inde);
           // int[] vs=Arrays.copyOfRange(v,0,inde+1);
           // for(int i : vs)System.out.println(i);
-            System.out.println(10/Math.sqrt(10));
+        // printsal("abcd","");
           // System.out.println(maxvotes(vs,inde));
+          // subsewithspaces("","abcd");
+          onesmorezeros("",0,0,4);
       }
 
 }
