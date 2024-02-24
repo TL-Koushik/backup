@@ -1574,8 +1574,8 @@ StringBuilder str=new StringBuilder();
 static int co=1;
     public static void printsal(String s,String out){
             if(s.length() <1){
-              System.out.println(out + co);
-              co++;
+              System.out.println(out );
+              // co++;
               return;
             }
             // System.out.println(ou`t);
@@ -1631,11 +1631,73 @@ static int co=1;
       onesmorezeros(s+"1",++ones,zeros,n-1);
     }
 
+  public static Stack<Integer> sortingreplacer(Stack<Integer> s,int num){
+    if(s.isEmpty()){
+      s.push(num);
+      return s;
+    }
+    if(s.peek()<=num){
+      s.push(num);
+      return s;
+    }
+    int temp=s.pop();
+    s=sortingreplacer(s,num);
+    s.push(temp);
+    return s;
+  }
+  
+  public static Stack<Integer> sortstack(Stack<Integer> s){
+      if(s.isEmpty()){
+          return s;
+      }
+     int temp=s.pop();
+      sortstack(s);
+      return sortingreplacer(s,temp);
+  }
+  public static List< String > generateString(int N,String out) {
+              List<String> s=new ArrayList<>();
+          if(N==0){
+              s.add(out);
+              return s;
+          }
+          // List<String> s=new ArrayList<>();
+          if(out.length()==0 || out.charAt(out.length()-1)=='0'){
+            s.addAll(generateString(N-1,out+"1"));
+          }
+          // List<String> s=new ArrayList<>();
+          s.addAll(generateString(N-1,out+"0"));
+          return s;
+  }
+  public static List< String > generateStrin1g(int N) {
+        return generateString(N,"");
+  }
 
+  public static List<String> generatepara(int n,int open,int close,String out){
+    List<String> s=new ArrayList<>();
+    if(open==n && close==n){
+      s.add(out);
+      return s;
+    }
+    if(open==n){
+      s.addAll(generatepara(n,open,close+1,out+")"));
+    }
+    else{
+      if(open>close){
+      s.addAll(generatepara(n,open,close+1,out+")"));
+      }
+      s.addAll(generatepara(n,open+1,close,out+"("));
+    }
+    return s;
+  }
+
+  public static List<String> generateParenthesis(int n) {
+        return generatepara(n,0,0,"");   
+    }
 
 
   public static void main(String[] args) {
         int[] arr={1,2,3,4,5,6,7,8,9,10};
+        System.out.println(generateParenthesis(3));
         // arr=selection(arr);
         /*  for (int i = 0; i < arr.length; i++) {
             System.out.println(arr[i]);
@@ -1687,6 +1749,13 @@ static int co=1;
         // int[] b = {2, 3, 6, 15};
         //   System.out.println(median(a,b));
       // System.out.println(8);
+      // Stack<Integer> s=new Stack<>();
+      // s.push(10);
+      // s.push(5);
+      // s.push(2);
+      // s.push(3);
+      // s.push(1);
+      // System.out.println(sortstack(s));
       // ArrayList<Integer> l=new ArrayList<>();
       // ArrayList<Integer> l2=new ArrayList<>();
       // l.add(1);
@@ -1725,7 +1794,9 @@ static int co=1;
         // printsal("abcd","");
           // System.out.println(maxvotes(vs,inde));
           // subsewithspaces("","abcd");
-          onesmorezeros("",0,0,4);
+          // onesmorezeros("",0,0,4);
+          // String s=new String("003");
+          // System.out.println(Integer.parseInt(s));
       }
 
 }
