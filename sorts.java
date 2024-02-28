@@ -1694,10 +1694,89 @@ static int co=1;
         return generatepara(n,0,0,"");   
     }
 
+  public static int knapsackrecu(int[] w,int[] price,int maxwe,int n,int[][] td){
+    if(n==0 || maxwe==0){
+      return 0;
+    }
+    if(td[maxwe][n]!=-1){
+      System.out.println(td[maxwe][n]);
+      return td[maxwe][n];
+    }
+    if(maxwe<w[n-1]){
+      td[maxwe][n]=knapsackrecu(w,price,maxwe,n-1,td);
+      System.out.println(td[maxwe][n]);
+      return td[maxwe][n];
+      
+    }
+    else{
+      td[maxwe][n]= Math.max(price[n-1]+knapsackrecu(w,price,maxwe-w[n-1],n-1,td),knapsackrecu(w,price,maxwe,n-1,td));
+      System.out.println(td[maxwe][n]);
+      return td[maxwe][n];
+      // return td[maxwe][n];
+    }
+  }
+  static int max(int a, int b) { return (a > b) ? a : b; } 
+  
+    // Returns the maximum value that can 
+    // be put in a knapsack of capacity W 
+    static int knapSack(int W, int wt[], int val[], int n) 
+    { 
+        int i, w; 
+        int K[][] = new int[n + 1][W + 1]; 
+  
+        // Build table K[][] in bottom up manner 
+        for (i = 0; i <= n; i++) { 
+            for (w = 0; w <= W; w++) { 
+                if (i == 0 || w == 0) 
+                    K[i][w] = 0; 
+                else if (wt[i - 1] <= w) 
+                    K[i][w] 
+                        = max(val[i - 1] 
+                                  + K[i - 1][w - wt[i - 1]], 
+                              K[i - 1][w]); 
+                else
+                    K[i][w] = K[i - 1][w]; 
+            } 
+        } 
+        for (i = 0; i <= n; i++) { 
+            for (w = 0; w <= W; w++){
+            System.out.print(" ");}
+              System.out.print(" ");System.out.print(K[i][w]);
+        }
+  
+        return K[n][W]; 
+    } 
+     static boolean o=false;
+ public static boolean sumsubsetdy(int[] nums, int k, int n, int sum) {
+        if (n < 0) {
+            // All elements have been considered
+            return sum == k;
+        }
+
+        // Check if the subset with the current element or without the current element has the target sum
+        return sumsubsetdy(nums, k, n - 1, sum) || sumsubsetdy(nums, k, n - 1, sum + nums[n]);
+    }
 
   public static void main(String[] args) {
-        int[] arr={1,2,3,4,5,6,7,8,9,10};
-        System.out.println(generateParenthesis(3));
+       int n[] = new int[] { 1, 2, 3}; 
+        boolean s=sumsubsetdy(n,6,2,0);
+        System.out.print(s);
+      //   int weight[] = new int[] { 1, 1, 3}; 
+      //   int W = 3; 
+      //   int N = profit.length; 
+      //   int n = profit.length;
+      //  int[][] memo=new int[W+1][N+1];
+      //  for(int i=0;i<memo.length;i++){
+      //   for(int j=0;j<memo[0].length;j++){
+      //     memo[i][j]=-1;
+      //   }
+      //  }
+      //   // System.out.println(generateParenthesis(3));
+      //   //  int profit[] = new int[] { 1, 2, 3}; 
+      //   // int weight[] = new int[] { 1, 1, 3}; 
+      //   // int W = 3; 
+      //   // int n = profit.length; 
+      //   System.out.println(knapSack(W, weight, profit, n));
         // arr=selection(arr);
         /*  for (int i = 0; i < arr.length; i++) {
             System.out.println(arr[i]);
